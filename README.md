@@ -50,3 +50,7 @@ test_main.py       Test suite using FastAPI's TestClient
 requirements.txt   Pinned dependencies
 cd0582.postman_collection.json   Postman collection for manual API testing
 ```
+
+## Credits
+
+This exercise (the FastAPI app, tests, and Postman collection) is coursework from Udacity's ML DevOps Engineer Nanodegree, forked from `udacity/cd0582-api-deployment-with-fastapi`. Udacity's own upstream repo for this exercise doesn't include a license, so no license is claimed here either.
