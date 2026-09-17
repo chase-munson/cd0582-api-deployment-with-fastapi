@@ -1,28 +1,16 @@
-# Census Model Inference API (FastAPI)
+# FastAPI Item API (Udacity coursework)
 
-A small FastAPI service exercising REST API design for machine learning model
-inference: typed request/response models with Pydantic, a POST endpoint that
-accepts a record and returns a result, and a GET endpoint that looks it back
-up — the same request/response shape a real model-serving API would use.
+A small FastAPI exercise from Udacity's ML DevOps Engineer Nanodegree: build and test a REST API with typed request/response models. There's no actual ML model behind this one — it's just the API layer itself, done in isolation.
 
-## Problem
+## What it does
 
-Before deploying an actual trained model behind an API, it's worth getting
-the API layer right on its own: request validation, typed responses, and a
-test suite that exercises both endpoints. This project builds and tests that
-layer in isolation.
+- **`TaggedItem` model** (Pydantic): validates an incoming record with `name`, `tags`, and `item_id`.
+- **POST `/items/`**: accepts a `TaggedItem` and stores it in memory, keyed by `item_id`.
+- **GET `/items/{item_id}`**: looks up a stored item by ID and returns it; returns a not-found message for an unknown ID.
 
-## Approach
+## Tests
 
-- **FastAPI + Pydantic**: a `TaggedItem` model defines the shape of an
-  incoming record (`name`, `tags`, `item_id`), validated automatically by
-  Pydantic on every request.
-- **POST `/items/`**: accepts a `TaggedItem` and stores it in memory, keyed
-  by `item_id`.
-- **GET `/items/{item_id}`**: looks up a stored item by ID and returns a
-  formatted response; returns a not-found message for an unknown ID.
-- **Testing**: `test_main.py` uses FastAPI's `TestClient` to exercise the
-  POST and GET endpoints without needing a running server.
+`test_main.py` uses FastAPI's `TestClient` to exercise the API. 2 of 3 tests currently pass (the POST and GET item tests). The third, `test_api_locally_get_root`, checks a `/` root route that `main.py` doesn't actually define, so it fails with a 404 — looks like a leftover test that never got reconciled with this version of the starter code.
 
 ## How to run
 
@@ -36,8 +24,8 @@ layer in isolation.
    ```bash
    uvicorn main:app --reload
    ```
-   The interactive API docs are then available at `http://127.0.0.1:8000/docs`.
-3. Run the test suite:
+   Interactive API docs are then available at `http://127.0.0.1:8000/docs`.
+3. Run the tests:
    ```bash
    pytest
    ```
